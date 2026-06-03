@@ -1,0 +1,26 @@
+name: Daily Stock Scanner YFinance
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # รันอัตโนมัติทุกวันเวลาเที่ยงคืน (00:00 UTC)
+  workflow_dispatch: # เปิดให้กดรันมือเองได้
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        pip install requests yfinance pandas # 👈 เพิ่ม yfinance และ pandas เข้าไปตรงนี้
+
+    - name: Run Scanner Script
+      run: python scanner_yf.py
+      
