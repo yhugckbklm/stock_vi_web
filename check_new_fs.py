@@ -32,6 +32,11 @@ def bot_sent(target_line,f):
     }
     data = {
         "to" : target_line,
-        
+        "messages": [
+            {
+                "type": "text",
+                "text": message_text
+            }
+        ]
         
     }
