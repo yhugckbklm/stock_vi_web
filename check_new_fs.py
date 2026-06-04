@@ -24,11 +24,13 @@ for i in ticker_list:
     u_latest_quarterly = latest_quarterly.strftime('%Y-%m-%d')
     if u_date == latest_quarterly:
         u_iden = supabase.table("stock_list").select("user_id").eq("key_ticker", i).execute()
-def bot_sent(d,f):
+def bot_sent(target_line,f):
     url = ""
     headers = {
         head
     }
     data = {
+        "to" : target_line,
+        
         
     }
