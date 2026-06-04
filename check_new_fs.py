@@ -27,7 +27,8 @@ for i in ticker_list:
 def bot_sent(target_line,f):
     url = ""
     headers = {
-        head
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {LINE_ACCESS_TOKEN}" # รหัสผ่านของบอทเรา
     }
     data = {
         "to" : target_line,
