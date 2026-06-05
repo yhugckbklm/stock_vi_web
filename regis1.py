@@ -46,17 +46,19 @@ email = st.text_input("email:")
 password = st.text_input("password:")
 line_id = st.text_input("line id: ")
 
-def signup(email, password):
+def signup(email, password, line_id):
     email_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
     if not re.match(email_pattern, email):
         return False
     if len(password) < 8:
         return False
+    if line_id:
+        return False
     return True
 s = st.button("sent")
 
 if s:
-    if signup(email, password):
+    if signup(email, password, line_id):
         try:
             try:
                 supabase.auth.sign_up({
