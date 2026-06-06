@@ -25,7 +25,7 @@ for i in ticker_list:
     if u_date == u_latest_quarterly:
         u_iden = supabase.table("stock_list").select("user_id").eq("key_ticker", i).execute()
 def bot_sent(target_line,f):
-    url = ""
+    url = "https://api.line.me/v2/bot/message/push"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {LINE_ACCESS_TOKEN}" # รหัสผ่านของบอทเรา
