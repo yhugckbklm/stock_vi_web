@@ -23,7 +23,7 @@ for i in ticker_list:
     latest_quarterly = quarterly.columns[0]
     u_latest_quarterly = latest_quarterly.strftime('%Y-%m-%d')
     if u_date == u_latest_quarterly:
-        u_iden = supabase.table("stock_list").select("user_id").eq("key_ticker", i).execute()
+        u_iden = supabase.table("stock_list").select("line_id").eq("key_ticker", i).eq("user_id", current_user).execute()
 def bot_sent(target_line,f):
     url = "https://api.line.me/v2/bot/message/push"
     headers = {
