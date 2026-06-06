@@ -53,7 +53,7 @@ def signup(email, password, line_id):
     if len(password) < 8:
         return False
     if line_id:
-        return False
+        return True
     return True
 s = st.button("sent")
 
@@ -67,6 +67,8 @@ if s:
                          })
             except:
                 pass
+            try:
+                supabase.table(stock_list).insert(line_id).execute()
             response = supabase.auth.sign_in_with_password({
                 "email": email,
                 "password": password
