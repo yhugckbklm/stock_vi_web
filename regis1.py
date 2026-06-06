@@ -69,6 +69,8 @@ if s:
                 pass
             try:
                 supabase.table(stock_list).insert(line_id).execute()
+            except:
+                pass
             response = supabase.auth.sign_in_with_password({
                 "email": email,
                 "password": password
