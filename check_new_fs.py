@@ -46,4 +46,5 @@ def bot_sent(target_line, massage_text):
         ]
         
     }
+    request.post(url,header=headers,json=data)
 bot_sent(line_id, z)
