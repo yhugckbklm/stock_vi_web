@@ -23,8 +23,14 @@ for i in ticker_list:
     latest_quarterly = quarterly.columns[0]
     u_latest_quarterly = latest_quarterly.strftime('%Y-%m-%d')
     if u_date == u_latest_quarterly:
-        u_iden = supabase.table("stock_list").select("line_id").eq("key_ticker", i).eq("user_id", current_user).execute()
-def bot_sent(target_line,f):
+        valid_token = get_valid_token()
+                if valid_token:
+                    current_user_uuid = st.session_state.user_id
+                    u_iden = supabase.table("stock_list").select("line_id").eq("key_ticker", i).eq("user_id", current_user_uuid).execute()
+                    line_massage = {
+                        "key_massage" : "it's already new quarter! check new value of your stocks"
+                    }
+def bot_sent(target_line, massage_text):
     url = "https://api.line.me/v2/bot/message/push"
     headers = {
         "Content-Type": "application/json",
@@ -40,3 +46,4 @@ def bot_sent(target_line,f):
         ]
         
     }
+bot_sent(line_id, z)
