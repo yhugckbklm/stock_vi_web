@@ -1,11 +1,31 @@
 import yfinance as yf
 from supabase import create_client, Client
-import request 
+import requests
+import streamlit as st
+
 sb_url: str = "https://mmczveoapjucozahhohr.supabase.co"
 sb_key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1tY3p2ZW9hcGp1Y296YWhob2hyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NTc5ODI4MiwiZXhwIjoyMDkxMzc0MjgyfQ.BVchJwn-sMJmA32YmQ8VhCOWAZnNRiL1pkBx7n9rNNA"
 supabase: Client = create_client(sb_url,sb_key)
 
 u_stocks = supabase.table("stock_list").select("key_ticker").execute()
+
+def bot_sent(target_line, message_text):
+    url = "https://api.line.me/v2/bot/message/push"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "11d81487f68d33b77db7e9ccc7d990e6" # รหัสผ่านของบอทเรา
+    }
+    data = {
+        "to" : target_line,
+        "messages": [
+            {
+                "type": "text",
+                "text": message_text
+            }
+        ]  
+    }
+    requests.post(url,header=headers,json=data)
+
 
 
 print(u_stocks)
@@ -15,7 +35,8 @@ for stock in u_stocks.data:
     ticker = (stock['key_ticker'])
     ticker_list.append(ticker)
 for i in ticker_list:
-    date = supabase.table("stock_list").select("latest_quarterly").eq("key_ticker", i).execute()
+    u_ticker = (i[ticker_list])
+    date = supabase.table("stock_list").select("latest_quarterly").eq("key_ticker", u_ticker).execute()
     u_date = date.data[0]['latest_quarterly']
     
     stock = yf.Ticker(i)
@@ -23,28 +44,11 @@ for i in ticker_list:
     latest_quarterly = quarterly.columns[0]
     u_latest_quarterly = latest_quarterly.strftime('%Y-%m-%d')
     if u_date == u_latest_quarterly:
-        valid_token = get_valid_token()
-                if valid_token:
-                    current_user_uuid = st.session_state.user_id
-                    u_iden = supabase.table("stock_list").select("line_id").eq("key_ticker", i).eq("user_id", current_user_uuid).execute()
-                    line_massage = {
-                        "key_massage" : "it's already new quarter! check new value of your stocks"
-                    }
-def bot_sent(target_line, massage_text):
-    url = "https://api.line.me/v2/bot/message/push"
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {11d81487f68d33b77db7e9ccc7d990e6}" # รหัสผ่านของบอทเรา
-    }
-    data = {
-        "to" : target_line,
-        "messages": [
-            {
-                "type": "text",
-                "text": message_text
-            }
-        ]
-        
-    }
-    request.post(url,header=headers,json=data)
-bot_sent(line_id, z)
+        u_iden = supabase.table("stock_list").select("line_id").eq("key_ticker", i).execute()
+        if u_iden.data:
+            for o in u_iden.data:
+                line_id = (o[u_iden.data])
+                line_message = {
+                    "key_message" : "it's already new quarter! check new value of your stocks"
+                }
+                bot_sent(line_id, line_message)
