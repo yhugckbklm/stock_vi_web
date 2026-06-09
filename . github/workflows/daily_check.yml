@@ -18,8 +18,8 @@ jobs:
         python-version: '3.10'
 
     - name: Install dependencies
-      run: |
-        pip install requests yfinance pandas # 👈 เพิ่ม yfinance และ pandas เข้าไปตรงนี้
+      run: | 
+        pip install requests yfinance pandas supabase # เพิ่ม yfinance และ pandas เข้าไปตรงนี้
 
     - name: Run Scanner Script
       run: python scanner_yf.py
