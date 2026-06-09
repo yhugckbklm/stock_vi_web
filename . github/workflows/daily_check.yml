@@ -19,7 +19,7 @@ jobs:
 
     - name: Install dependencies
       run: | 
-        pip install requests yfinance pandas supabase # เพิ่ม yfinance และ pandas เข้าไปตรงนี้
+        pip install requests yfinance pandas supabase
 
     - name: Run Scanner Script
       run: python scanner_yf.py
