@@ -44,7 +44,10 @@ for i in ticker_list:
     latest_quarterly = quarterly.columns[0]
     u_latest_quarterly = latest_quarterly.strftime('%Y-%m-%d')
     if u_date == u_latest_quarterly:
-        u_iden = supabase.table("stock_list").select("line_id").eq("key_ticker", i).execute()
+        u_user = supabase.table("stock_list").select("user_id").eq("key_ticker", u_ticker).execute()
+        for u in u_user.data:
+            name_u_user = (u[u_user.data])
+            u_iden = supabase.table("user_info").select("line_id").eq("id", name_u_user).execute()
         if u_iden.data:
             for o in u_iden.data:
                 line_id = (o[u_iden.data])

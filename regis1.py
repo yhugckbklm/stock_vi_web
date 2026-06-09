@@ -38,35 +38,40 @@ st.button("pay for premium quality")
 st.title("premium")
 
      
-if "line_u" not in st.session_state:
-    st.session_state.line_u = False                    
+                   
 if "is_authenticated" not in st.session_state:
     st.session_state.is_authenticated = False
     st.session_state.user_email = ""
 email = st.text_input("email:")
 password = st.text_input("password:")
-line_id = st.text_input("line id: ")
-if line_id:
-    st.session_state.line_u == True
+raw_line_id = st.text_input("line id: ")
+line_id = str(raw_line_id)
 
-def signup(email, password):
+def signup(email, password, line_id):
     email_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
     if not re.match(email_pattern, email):
         return False
     if len(password) < 8:
         return False
+    if line_id:
+        return True
     return True
 
 s = st.button("sent")
 
 if s:
-    if signup(email, password):
+    if signup(email, password, line_id):
         try:
             try:
                 supabase.auth.sign_up({
-                         "email":email,
-                         "password":password
-                         })
+                         "email" : email,
+                         "password" : password,
+                         "options":{
+                             "data":{
+                                 "line_id" : line_id
+                             }
+                         }
+                })
             except:
                 pass
             
@@ -91,10 +96,7 @@ else:
     # ลิงก์ตรงจาก Nasdaq Trader (อัปเดตทุกวัน)
     url = "http://www.nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt"
 
-valid_token = get_valid_token()
-if valid_token:
-    current_user_uuid = st.session_state.user_id
-    line_id = supabase.table("stock_list").select("line_id").eq("user_id", current_user_uuid).execute()
+
                       
                                 
                            
@@ -173,7 +175,7 @@ if select_stock != "":
                             "key_latest_quarterly" : u_lastest_quarterly,
                             "key_name" : name,
                             "user_id": current_user_uuid,
-                            "line_id": line_id
+                        
                             }
                         supabase.postgrest.auth(valid_token)
                         supabase.table("stock_list").upsert(your_stock).execute()
