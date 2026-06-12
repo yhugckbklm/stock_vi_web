@@ -41,13 +41,6 @@ with st.sidebar:
         if st.button("click!", key="btn1"):
             st.session_state.page_selection = "home"
             st.rerun()
-    col1, col2 = st.columns([3, 2])        
-    with col1:
-        st.write("base page")
-    with col2:
-        if st.button("click!", key="btn3"):
-            st.session_state.page_selection = "base"
-            st.rerun()      
     if st.session_state.is_authenticated:
         valid_token = get_valid_token()
         if valid_token: 
@@ -82,10 +75,6 @@ elif st.session_state.page_selection == "check_stocks":
     pg.run()
 elif st.session_state.page_selection == "home":
     target_page = st.Page("whatkind.py", title="whatkind")
-    pg = st.navigation([target_page])
-    pg.run()
-elif st.session_state.page_selection == "base":
-    target_page = st.Page("home.py", title="home")
     pg = st.navigation([target_page])
     pg.run()
 else:
