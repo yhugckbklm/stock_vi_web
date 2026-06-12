@@ -25,7 +25,25 @@ def get_valid_token():
                         except:
                                st.error("Session ของคุณหมดอายุแล้ว กรุณาล็อกอินใหม่")
                                return None
+  
+def signup(email, password, line_id):
+        email_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+        if not re.match(email_pattern, email):
+            return False
+        if len(password) < 8:
+            return False
+        if line_id:
+            return True
+        return True
     
+def signin(email_sign , password_sign):
+        email_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+        if not re.match(email_pattern, email_sign):
+            return False
+        if len(password_sign) < 8:
+            return False
+        return True   
+            
 st.title("Why premium")
 
 st.header("notification true value of your chosen stock every quarter.")
@@ -37,33 +55,25 @@ st.button("pay for premium quality")
 
 st.title("premium")
 
-     
+    
                    
 if "is_authenticated" not in st.session_state:
     st.session_state.is_authenticated = False
     st.session_state.user_email = ""
-email = st.text_input("email:")
-password = st.text_input("password:")
-raw_line_id = st.text_input("line id: ")
-line_id = str(raw_line_id)
+with st.form("my_signup_form"):
+    email = st.text_input("email:",key="signup_email")
+    password = st.text_input("password:",key="signup_password")
+    raw_line_id = st.text_input("line id: ")
+    line_id = str(raw_line_id)
 
-def signup(email, password, line_id):
-    email_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
-    if not re.match(email_pattern, email):
-        return False
-    if len(password) < 8:
-        return False
-    if line_id:
-        return True
-    return True
-
-s = st.button("sent")
+    
+ 
+    s = st.form_submit_button("sent")
 
 if s:
     if signup(email, password, line_id):
         try:
-            try:
-                supabase.auth.sign_up({
+            supabase.auth.sign_up({
                          "email" : email,
                          "password" : password,
                          "options":{
@@ -72,21 +82,22 @@ if s:
                              }
                          }
                 })
-            except:
-                pass
-
-email = st.text_input("email:")
-password = st.text_input("password:")
-
-signup(email, password)            
-sign_in_button = st.button("sent")
-if sign_in_button:
-    response = supabase.auth.sign_in_with_password({
-                "email": email,
-                "password": password
-                })
+        except Exception as e:
+            st.error(f"สมัครสมาชิกไม่สำเร็จ: {e}")
+with st.form("my_signin_form"):
+    email_sign = st.text_input("email:",key="login_email")
+    password_sign = st.text_input("password:",key="login_pass")
             
-            if response:
+    sign_in_button = st.form_submit_button("sent")
+
+if sign_in_button:
+    
+    if signin(email_sign, password_sign):
+        response = supabase.auth.sign_in_with_password({
+                "email":email_sign,
+                "password":password_sign
+                })
+        if response:
                 st.session_state.access_token = response.session.access_token
                 st.session_state.refresh_token = response.session.refresh_token
                 st.session_state.user_id = response.user.id
@@ -95,13 +106,9 @@ if sign_in_button:
                 st.success(f"ตอนนี้คุณล็อกอินในชื่อ: {response.user.email}") 
                 if st.session_state.is_authenticated:
                     st.rerun()      
-        except Exception as e:
-                     st.error(f" {str(e)}")
             
-else:                     
-    # ลิงก์ตรงจาก Nasdaq Trader (อัปเดตทุกวัน)
-    url = "http://www.nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt"
 
+url = "http://www.nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt"
 
                       
                                 
