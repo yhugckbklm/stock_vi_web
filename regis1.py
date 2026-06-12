@@ -72,6 +72,7 @@ if s:
                              }
                          }
                 })
+                st.rerun()
             except:
                 pass
 if "is_authenticated" not in st.session_state:
@@ -87,7 +88,9 @@ def signup(email, password):
     if len(password) < 8:
         return False
     return True            
-            response = supabase.auth.sign_in_with_password({
+sign_in_button = st.button("sent")
+if sign_in_button:
+    response = supabase.auth.sign_in_with_password({
                 "email": email,
                 "password": password
                 })
