@@ -74,7 +74,19 @@ if s:
                 })
             except:
                 pass
-            
+if "is_authenticated" not in st.session_state:
+    st.session_state.is_authenticated = False
+    st.session_state.user_email = ""
+email = st.text_input("email:")
+password = st.text_input("password:")
+
+def signup(email, password):
+    email_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+    if not re.match(email_pattern, email):
+        return False
+    if len(password) < 8:
+        return False
+    return True            
             response = supabase.auth.sign_in_with_password({
                 "email": email,
                 "password": password
