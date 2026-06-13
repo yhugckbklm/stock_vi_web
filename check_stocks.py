@@ -1,13 +1,39 @@
 import yfinance as yf
 import streamlit as st
-st.write(st.session_state.selected_item)
-premium_user_stock = st.session_state.selected_item
+import pandas as pd
+import edgar
 
+edgar.set_identity("nihilis44@gmail.com")
+premium_user_stock = st.session_state.selected_item
+st.write(premium_user_stock)
 def calculate(premium_user_stock):
+  company = edgar.Company(premium_user_stock)
+  fillings = company.get_filings(form="10-K")
+  latest_filling = fillings.lastest
+  financials = latest_filling.financial()
+  st.write(financials)
+  income_statement = financials.get_income_statement()
+  balance_sheet = financials.get_balance_sheet()
+  cash_flow = financials.get_cash_flow_statement()
+  
+  df_income = income_statement.to_dataframe()
+  df_balance = balance_sheet.to_dataframe()
+  df_cf = cash_flow.to_dataframe()
+  
+  shares_outstanding = latest_filling.shares_outstanding
+  
+  return {
+    "income" : df_income,
+    "balance" : df_balance,
+    "cash_flow" : df_cf,
+    "shares" : shares_outstanding,
+  }
+  
   score_collect = []
   ticker = yf.Ticker(premium_user_stock)
   info = ticker.info                                                                   
   earnings_growth = info.get('earningsGrowth')
+  st.write(earnings_growth)
   if earnings_growth >= 0.1:
     try:
       cash_flow = ticker.cashflow
@@ -18,7 +44,6 @@ def calculate(premium_user_stock):
       latest_fcf = ocf - capex
       
     growth_rate = info.get('earningsQuarterlyGrowth')
-      
     projected_fcf = []
     pv_fcf = []
     discount_rate = 0.09
