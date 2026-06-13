@@ -14,11 +14,11 @@ def calculate(premium_user_stock):
   st.write(financials)
   income_statement = financials.get_income_statement()
   balance_sheet = financials.get_balance_sheet()
-  cash_flow = financials.get_cash_flow_statement()
+  cash_flow1 = financials.get_cash_flow_statement()
   
   df_income = income_statement.to_dataframe()
   df_balance = balance_sheet.to_dataframe()
-  df_cf = cash_flow.to_dataframe()
+  df_cf = cash_flow1.to_dataframe()
   
   shares_outstanding = latest_filling.shares_outstanding
   
@@ -31,8 +31,12 @@ def calculate(premium_user_stock):
   
   score_collect = []
   ticker = yf.Ticker(premium_user_stock)
-  info = ticker.info                                                                   
-  if earnings_growth >= 0.1:
+  info = ticker.info
+  net_income_this_year = df_income.loc["Net income"].iloc[0]
+  net_income_last_year = df_income.loc["Net income"].iloc[1]
+  calculated_growth = (net_income_this_year - net_income_last_year) / abs(net_income_last_year)
+
+  if calculated_growth >= 0.1:
     try:
       cash_flow = ticker.cashflow
       latest_fcf = cash_flow.loc['Free Cash Flow'].iloc[0]
