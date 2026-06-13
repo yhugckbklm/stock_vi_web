@@ -22,7 +22,7 @@ def calculate(premium_user_stock):
   
   shares_outstanding = latest_filling.shares_outstanding
   
-  return {
+  {
     "income" : df_income,
     "balance" : df_balance,
     "cash_flow" : df_cf,
@@ -32,8 +32,6 @@ def calculate(premium_user_stock):
   score_collect = []
   ticker = yf.Ticker(premium_user_stock)
   info = ticker.info                                                                   
-  earnings_growth = info.get('earningsGrowth')
-  st.write(earnings_growth)
   if earnings_growth >= 0.1:
     try:
       cash_flow = ticker.cashflow
