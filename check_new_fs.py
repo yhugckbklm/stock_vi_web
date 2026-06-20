@@ -13,7 +13,7 @@ def bot_sent(target_line, message_text):
     url = "https://api.line.me/v2/bot/message/push"
     headers = {
         "Content-Type": "application/json",
-        "Authorization": "11d81487f68d33b77db7e9ccc7d990e6" # รหัสผ่านของบอทเรา
+        "Authorization": "9a951114e10efa6a5a3f0187a56e14d6" # รหัสผ่านของบอทเรา
     }
     data = {
         "to" : target_line,
