@@ -1,6 +1,9 @@
 name: Daily Stock Scanner YFinance
 
 on:
+  push:
+    branches:
+      - test 
   schedule:
     - cron: '0 0 * * *' # รันอัตโนมัติทุกวันเวลาเที่ยงคืน (00:00 UTC)
   workflow_dispatch: # เปิดให้กดรันมือเองได้
