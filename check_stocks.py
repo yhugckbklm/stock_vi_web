@@ -12,13 +12,11 @@ cash_flow = ticker_object.cashflow
 
 # ดึงค่า CFO (Operating Cash Flow) และ CAPEX (Capital Expenditures)
 # หมายเหตุ: ใน yfinance เวอร์ชันล่าสุด บรรทัดแถวจะถูกเก็บไว้เป็นชื่อเต็ม หรือใช้ .loc ในการดึง
-
-cfo = cash_flow.loc['Operating Cash Flow']
-capex = cash_flow.loc['Capital Expenditures']
+fcf = cash_flow.loc['Free Cash Flow']
 # 2. ดึงงบกระแสเงินสด (Cash Flow Statement) ออกมาเป็น DataFrame
 
 
-st.write(cfo)
-st.write(capex)
+st.write(fcf_)
+
 
 
