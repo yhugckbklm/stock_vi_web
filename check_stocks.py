@@ -11,15 +11,17 @@ st.header("Welcome to Premium")
 ticker_symbol = st.session_state.selected_item
 st.write(ticker_symbol)
 ticker_object = yf.Ticker(ticker_symbol)
+cash_flow = ticker_object.cashflow
 
+# ดึงค่า CFO (Operating Cash Flow) และ CAPEX (Capital Expenditures)
+# หมายเหตุ: ใน yfinance เวอร์ชันล่าสุด บรรทัดแถวจะถูกเก็บไว้เป็นชื่อเต็ม หรือใช้ .loc ในการดึง
+
+cfo = cash_flow.loc['Operating Cash Flow']
+capex = cash_flow.loc['Capital Expenditures']
 # 2. ดึงงบกระแสเงินสด (Cash Flow Statement) ออกมาเป็น DataFrame
-cash_flow = ticker_object.quarterly_cash_flow
 
-# 3. เจาะจงดึงแถว CFO (ใน yfinance จะใช้ชื่อมาตรฐานว่า 'Operating Cash Flow')
-# มันจะดึงข้อมูลย้อนหลังมาให้ 4 ปีล่าสุดทันที
-cfo_data = cash_flow.loc['Operating Cash Flow'].iloc[:4]
-p_cfo_data = cfo_data.sum()
 
-st.write(p_cfo_data)
+st.write(cfo)
+st.write(capex)
 
 
