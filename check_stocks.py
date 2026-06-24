@@ -16,7 +16,7 @@ fcf = cash_flow.loc['Free Cash Flow']
 # 2. ดึงงบกระแสเงินสด (Cash Flow Statement) ออกมาเป็น DataFrame
 
 
-st.write(fcf_)
+st.write(fcf)
 
 
 
