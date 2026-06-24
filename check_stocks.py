@@ -1,10 +1,7 @@
 import streamlit as st
 import yfinance as yf
 import pandas as pd
-from edgar import Company, set_identity
 
-# ตั้งค่า Identity สำหรับดึงข้อมูล SEC
-set_identity("nihilis44@gmail.com")
 
 
 st.header("Welcome to Premium")
