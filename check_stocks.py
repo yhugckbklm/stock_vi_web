@@ -49,6 +49,8 @@ business_value = total_one_pv + tv
 balance_sheet = ticker_object.balancesheet
 total_debt = balance_sheet.loc['Total Debt'].iloc[0]
 cash_and_equiv = balance_sheet.loc['Cash And Cash Equivalents'].iloc[0]
+net_debt = total_debt - cash_and_equiv
+equity_value = business_value - net_debt
 total_shares = ticker_object.info.get('sharesOutstanding')
-real_price = business_value/total_shares
+real_price = equity_value/total_shares
 st.write(real_price)
