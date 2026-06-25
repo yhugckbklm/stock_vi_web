@@ -46,6 +46,9 @@ for o_pv in pv_list:
 b_tv = fcf_list[4] * (1 + 0.2)/(0.08 - 0.02)
 tv = b_tv/(1 + 0.08)**5
 business_value = total_one_pv + tv
+balance_sheet = ticker_object.balancesheet
+total_debt = balance_sheet.loc['Total Debt'].iloc[0]
+cash_and_equiv = balance_sheet.loc['Cash And Cash Equivalents'].iloc[0]
 total_shares = ticker_object.info.get('sharesOutstanding')
 real_price = business_value/total_shares
 st.write(real_price)
