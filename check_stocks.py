@@ -43,7 +43,7 @@ for o_pv in pv_list:
     total_one_pv += one_pv
     st.write(total_one_pv)       
 
-b_tv = fcf_list[4] * (1 + 0.2)/(0.08 - 0.02)
+b_tv = fcf_list[4] * (1 + 0.02)/(0.08 - 0.02)
 tv = b_tv/(1 + 0.08)**5
 business_value = total_one_pv + tv
 balance_sheet = ticker_object.balancesheet
