@@ -1,105 +1,120 @@
 import streamlit as st
-import requests
 import yfinance as yf
-st.header("welcome to premium")
+import pandas as pd
 
-premium_user_stock = st.text_input("input your stock: ")
+st.header("Welcome to Premium")
+url = "http://www.nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt"
 
-def calculate(premium_user_stock):
-  score_collect = []
-  ticker = yf.Ticker(premium_user_stock)
-  info = ticker.info                                                                   
-  earnings_growth = info.get('earningsGrowth')
-  if earnings_growth >= 0.1:
-    try:
-      cash_flow = ticker.cashflow
-      latest_fcf = cash_flow.loc['Free Cash Flow'].iloc[0]
-    except:
-      ocf = cash_flow.loc['Cash Flow From Continuing Operating Activities'].iloc[0]
-      capex = abs(cash_flow.loc['Capital Expenditures'].iloc[0])
-      latest_fcf = ocf - capex
-      
-    growth_rate = info.get('earningsQuarterlyGrowth')
-      
-    projected_fcf = []
-    pv_fcf = []
-    discount_rate = 0.09
-    terminal_growth = 0.02
-    current_fcf = latest_fcf
-    for year in range(1,6):
-      
-      current_fcf*=(1 + growth_rate)
-      projected_fcf.append(current_fcf)
-        
-      pv = current_fcf / ((1 + discount_rate)**year)
-      pv_fcf.append(pv)
+                      
+                                
+                           
+try:
+    # ต้องระบุ sep='|' เพราะไฟล์นี้ใช้ขีดตั้งเป็นตัวแบ่ง
+    df = pd.read_csv(url, sep='|')
     
-    fcf_year_5 = projected_fcf[-1]
-    terminal_value = (fcf_year_5*(1+terminal_growth)) / (discount_rate - terminal_growth)
-    pv_terminal_value = terminal_value / ((1 + discount_rate) ** 5)
+    # ลบบรรทัดสุดท้ายที่เป็นข้อความสรุป (มักจะทำให้เกิด Error ถ้าไม่ลบ)
+    df = df[:-1] 
     
-    g_intrinsic_value = sum(pv_fcf) + pv_terminal_value
-    shares_outstanding = info.get('sharesOutstanding')
+    # เลือกเฉพาะ Symbol และชื่อหุ้น (ในไฟล์นี้ใช้ชื่อ 'Symbol' และ 'Security Name')
+    df_cleaned = df[['Symbol', 'Security Name']]
     
-    g_value_per_share = g_intrinsic_value / shares_outstanding
-    score_collect.append({'value':g_value_per_share,'stock_rated':g_value_per_share})
-    earnings_growth = info.get('earningsGrowth')
-    earnings_growth_percentage = earnings_growth * 100
-    score_growth = (earnings_growth_percentage - 10) / ( 20 - 10 ) * 10
-    st.write("This stock rate out of 10:", score_growth)
-     
-  dividend_yield = info.get('dividendYield')
-  payout_ratio = info.get('payoutRatio')
-  if dividend_yield <= 0.04:
-    roe = info.get('returnOnEquity')
-    payout_ratio = info.get('payoutRatio')
-    g = roe * (1 - payout_ratio)
-    d_0 = info.get('dividendRate')
-    d_1 = d_0 * (1 + g)
-    r = 0.08
-    mos = 0.25
-    d_intrinsic_value = d_1 / (r- g)
-    intrinsic_value_price = d_intrinsic_value * (1 - mos)
-    rate_dividend = ( dividend_yield ) * 100
-    score_collect.append({'value':intrinsic_value_price,'stock_rated':rate_dividend})
-    dividend_yield = info.get('dividendYield')
-    score_dividend = ( dividend_yield - 4 ) / ( 6 - 4 ) * 10
-    st.write("This stock rate out of 10:", score_dividend)
+    # บันทึกเป็น CSV จริงๆ (ใช้คอมม่าปกติ)
+    df_cleaned.to_csv("nasdaq_stocks.csv", index=False)
+    print("ดาวน์โหลดและบันทึกไฟล์สำเร็จ!")
+    
+except Exception as e:
+    print(f"เกิดข้อผิดพลาด: {e}")
+       
+@st.cache_data
+def search_list():
+    
+    df = pd.read_csv("nasdaq_stocks.csv")
+    df['display_text'] = df['Symbol']+"|"+df['Security Name']
+    
+    return df['display_text'].tolist()
   
-  pbv = info.get('priceToBook')
-  if pbv <= 1.5:
-    total_assets = ticker.quarterly_balance_sheet('Total Assets')
-    total_liabilities = ticker.quarterly_balance_sheet('Total Liabilities Net Minority Interest')
-    shares_outstanding = info.get('sharesOutstanding')
-    nav_per_shares = (total_assets - total_liabilities) / shares_outstanding
-    nav_per_shares_price = nav_per_shares * 1.0
-    rate_assets = ( 1 / pbv ) * 100
-    score_collect.append({'value':nav_per_shares_price,'stock_rated':rate_assets})
-  if not score_collect:
-    return 0
-  return score_collect
+stock_options = search_list()
 
-results = calculate(premium_user_stock)
-final_price = 0
-if results:
-  def safe_int(val):
-    try:
-        return int(val)
-    except (ValueError, TypeError):
-        return 0
-  total_rate = sum(safe_int(item['stock_rated']) for item in results)
-  
-  for item in results:
-    if total_rate > 0:
-       weight = int(item['stock_rated']) / total_rate
-       final_price += item['value'] * weight
-    else:
-       weight = 0 
+if 'stock_status' not in st.session_state:
+    st.session_state.stock_status = {}
 
-real_value = st.write("real value of stock: ",final_price,"$")
-safe_margin = final_price * 0.2
-buy_margin_price = final_price - safe_margin
-buy_price = st.write("buy price with 20% margin:",buy_margin_price,"$")
-sell_margin_price = final_price + safe_margin
-sell_price = st.write("sell price with 20% margin:",sell_margin_price,"$")
+
+select_stock = st.selectbox(
+    "input stock",options=[""]+stock_options,index=0
+)
+if select_stock != "":
+    ticker = select_stock.split("|")[0]
+    name = select_stock.split("|")[1]
+
+ticker_symbol = ticker
+st.write(ticker_symbol)
+ticker_object = yf.Ticker(ticker_symbol)
+cash_flow = ticker_object.cashflow
+cfo = cash_flow.loc['Operating Cash Flow'].iloc[0]
+# ดึงค่า CFO (Operating Cash Flow) และ CAPEX (Capital Expenditures)
+# หมายเหตุ: ใน yfinance เวอร์ชันล่าสุด บรรทัดแถวจะถูกเก็บไว้เป็นชื่อเต็ม หรือใช้ .loc ในการดึง
+capex = cash_flow.loc['Capital Expenditure'].iloc[0]
+# 2. ดึงงบกระแสเงินสด (Cash Flow Statement) ออกมาเป็น DataFrame
+fcf = cfo + capex if capex < 0 else cfo - capex
+
+st.write(fcf)
+
+forward_pe = ticker_object.info.get('forwardPE')
+peg_ratio = ticker_object.info.get('pegRatio')
+
+if forward_pe and peg_ratio and peg_ratio != 0:
+    g_from_peg = (forward_pe / peg_ratio)  # ผลลัพธ์มักออกมาเป็นเปอร์เซ็นต์เต็ม เช่น 14.5 หมายถึง 14.5%
+    st.write(f"ค่า g (Analyst Growth) ที่ถอดจากค่า PEG ของระบบ: {g_from_peg:.2f}%")
+    g_short = (g_from_peg / 100)
+   
+cost_of_debt = 0.058    
+risk_free_rate = 0.035
+credit_spread = 0.020 # สมมติฐานส่วนต่างความเสี่ยงหนี้ 2.0%
+equity_risk_premium = 0.55
+corporate_tax_rate = 0.21
+
+try:
+    short_debt = ticker_object.balance_sheet.loc['Current Debt'].iloc[0]
+except:
+    short_debt = 0    
+long_debt = ticker_object.balance_sheet.loc['Long Term Debt'].iloc[0]
+total_debt = short_debt + long_debt
+beta = ticker_object.info.get('beta')
+market_cap = ticker_object.info.get('marketCap')
+
+total_value = market_cap + total_debt
+weight_of_debt = total_debt / total_value
+weight_of_equity = market_cap / total_value
+cost_of_debt = risk_free_rate + credit_spread
+cost_of_equity = risk_free_rate + (beta * equity_risk_premium)
+wacc = (weight_of_equity * cost_of_equity) + (weight_of_debt * cost_of_debt * (1 - corporate_tax_rate))
+fcf_list = []    
+pv_list = []    
+h = (1 + wacc)       
+current_fcf = fcf
+for year in range(1, 6):# คูณ FCF ของปีนี้ ด้วย (1 + g_short) เพื่อหา FCF ปีถัดไป
+        next_fcf = current_fcf * (1 + g_short)
+        current_fcf = next_fcf # อัปเดตตัวแปรเพื่อใช้คูณในลูปปีถัดไป
+        fcf_list.append(current_fcf)
+        pv = next_fcf/(h)**year
+        pv_list.append(pv)
+        st.write(f"fff{pv}")
+total_one_pv = 0        
+for o_pv in pv_list:
+    one_pv = o_pv
+    st.write(one_pv)  
+    total_one_pv += one_pv
+    st.write(total_one_pv)       
+
+b_tv = fcf_list[4] * (1 + 0.02)/(0.08 - 0.02)
+tv = b_tv/(1 + 0.08)**5
+business_value = total_one_pv + tv
+balance_sheet = ticker_object.balancesheet
+total_debt = balance_sheet.loc['Total Debt'].iloc[0]
+cash_and_equiv = balance_sheet.loc['Cash And Cash Equivalents'].iloc[0]
+net_debt = total_debt - cash_and_equiv
+equity_value = business_value - net_debt
+total_shares = ticker_object.info.get('sharesOutstanding')
+real_price = equity_value/total_shares
+st.write(real_price)
 

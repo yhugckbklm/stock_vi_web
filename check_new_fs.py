@@ -41,7 +41,6 @@ for stock in u_stocks.data:
     latest_quarterly = quarterly.columns[0]
     u_latest_quarterly = latest_quarterly.strftime('%Y-%m-%d')
     print(u_latest_quarterly)
-
     if date != u_latest_quarterly:
         u_user = supabase.table("stock_list").select("user_id").eq("key_ticker", ticker).execute()
         for u in u_user.data:
@@ -50,6 +49,6 @@ for stock in u_stocks.data:
             if u_iden.data:
                 for o in u_iden.data:
                     line_id = o['line_id']
-                    line_message = "it's already new quarter check new value of your stocks"
+                    line_message = f"{ticker} it's already new quarter check new value of your stocks"
                     bot_sent(line_id, line_message)
 

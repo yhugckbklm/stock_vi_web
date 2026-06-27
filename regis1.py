@@ -44,16 +44,10 @@ def signin(email_sign , password_sign):
             return False
         return True   
             
-st.title("Why premium")
 
 st.header("notification true value of your chosen stock every quarter.")
 st.text("if you use the premium option, we will send you the true value of your chosen stock every quarter.")
 
-st.header("if you are interested in premium option")
-
-st.button("pay for premium quality")
-
-st.title("premium")
 
     
                    
