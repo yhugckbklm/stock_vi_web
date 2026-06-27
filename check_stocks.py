@@ -33,7 +33,7 @@ for year in range(1, 6):# คูณ FCF ของปีนี้ ด้วย (1
         next_fcf = current_fcf * (1 + g_short)
         current_fcf = next_fcf # อัปเดตตัวแปรเพื่อใช้คูณในลูปปีถัดไป
         fcf_list.append(current_fcf)
-        pv = next_fcf/h**year
+        pv = next_fcf/(h)**year
         pv_list.append(pv)
         st.write(f"fff{pv}")
 total_one_pv = 0        
