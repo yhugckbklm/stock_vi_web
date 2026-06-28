@@ -28,12 +28,13 @@ def get_valid_token():
   
 def signup(email, password, line_id):
         email_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+        lineid_pattern = r'^U[0-9a-f]{32}$'
         if not re.match(email_pattern, email):
             return False
         if len(password) < 8:
             return False
-        if line_id:
-            return True
+        if not re.match(lineid_pattern, line_id):
+            return False
         return True
     
 def signin(email_sign , password_sign):
