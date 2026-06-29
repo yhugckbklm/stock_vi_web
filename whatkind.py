@@ -122,3 +122,4 @@ def cally(ticker_symbol):
   total_shares = ticker_object.info.get('sharesOutstanding')
   real_price = equity_value/total_shares
   st.write(f"real price of {ticker_symbol} : {real_price}")
+  return 0
