@@ -50,7 +50,6 @@ if select_stock != "":
     
     
 def cally(ticker_symbol):
-  ticker_symbol = ticker
   st.write(ticker_symbol)
   ticker_object = yf.Ticker(ticker_symbol)
   cash_flow = ticker_object.cashflow
