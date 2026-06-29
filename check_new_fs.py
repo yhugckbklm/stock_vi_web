@@ -3,9 +3,11 @@ from supabase import create_client, Client
 import requests
 import streamlit as st
 from datetime import date
-
-sb_url: str = "https://mmczveoapjucozahhohr.supabase.co"
-sb_key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1tY3p2ZW9hcGp1Y296YWhob2hyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NTc5ODI4MiwiZXhwIjoyMDkxMzc0MjgyfQ.BVchJwn-sMJmA32YmQ8VhCOWAZnNRiL1pkBx7n9rNNA"
+import os
+from dotenv import load_dotenv
+load_dotenv()  
+sb_url: str = os.getenv("sb_url")
+sb_key: str = os.getenv("sb_secret")
 supabase: Client = create_client(sb_url,sb_key)
 
 u_stocks = supabase.table("stock_list").select("key_ticker", "key_latest_quarterly").execute()

@@ -1,13 +1,17 @@
 import streamlit as st
 from supabase import create_client, Client
+import os
+from dotenv import load_dotenv
+load_dotenv()  
+sb_url: str = os.getenv("sb_url")
+sb_key: str = os.getenv("sb_key")
+supabase: Client = create_client(sb_url,sb_key)
 # 1. จัดการ Session State
 if 'is_authenticated' not in st.session_state:
     st.session_state.is_authenticated = False
 if 'page_selection' not in st.session_state:
     st.session_state.page_selection = False
-sb_url: str = "https://mmczveoapjucozahhohr.supabase.co"
-sb_key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1tY3p2ZW9hcGp1Y296YWhob2hyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3OTgyODIsImV4cCI6MjA5MTM3NDI4Mn0.ZO6gqxInZEQD9xczdbzFMoWSKEQW8Wy1BoO54b3K0V8"
-supabase: Client = create_client(sb_url,sb_key)
+
 
 def get_valid_token():
                     try:
@@ -70,15 +74,15 @@ if st.session_state.page_selection == "regis":
     pg = st.navigation([target_page])
     pg.run()
 elif st.session_state.page_selection == "check_stocks":
-    target_page = st.Page("check_stocks.py", title="f")
+    target_page = st.Page("check_stocks.py", title="your stock value")
     pg = st.navigation([target_page])
     pg.run()
 elif st.session_state.page_selection == "home":
-    target_page = st.Page("whatkind.py", title="whatkind")
+    target_page = st.Page("whatkind.py", title="stock value")
     pg = st.navigation([target_page])
     pg.run()
 else:
-    target_page = st.Page("whatkind.py", title="whatkind") # เปลี่ยนชื่อไฟล์หน้า Home
+    target_page = st.Page("whatkind.py", title="stock value") # เปลี่ยนชื่อไฟล์หน้า Home
     pg = st.navigation([target_page])
     pg.run()
 

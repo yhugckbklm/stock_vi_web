@@ -3,9 +3,12 @@ import requests
 import re
 from supabase import create_client, Client
 import pandas as pd
-import yfinance as yf 
-sb_url: str = "https://mmczveoapjucozahhohr.supabase.co"
-sb_key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1tY3p2ZW9hcGp1Y296YWhob2hyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3OTgyODIsImV4cCI6MjA5MTM3NDI4Mn0.ZO6gqxInZEQD9xczdbzFMoWSKEQW8Wy1BoO54b3K0V8"
+import yfinance as yf
+import os
+from dotenv import load_dotenv
+load_dotenv()  
+sb_url: str = os.getenv("sb_url")
+sb_key: str = os.getenv("sb_key")
 supabase: Client = create_client(sb_url,sb_key)
 
 

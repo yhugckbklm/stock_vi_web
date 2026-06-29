@@ -662,6 +662,8 @@ APLX,Tradr 2X Long APLD Daily ETF
 APLY,YieldMax AAPL Option Income Strategy ETF
 APLZ,Tradr 2X Short APLD Daily ETF
 APM,Aptorum Group Limited - Class A Ordinary Shares
+APMC,AmperCap Acquisition Company - Ordinary Shares
+APMCR,AmperCap Acquisition Company - Right
 APMCU,AmperCap Acquisition Company - Unit
 APMU,ActivePassive Intermediate Municipal Bond ETF
 APO,"Apollo Global Management, Inc. (New) Common Stock"
@@ -3146,6 +3148,7 @@ DMAX,iShares Large Cap Max Buffer Dec ETF
 DMAY,FT Vest U.S. Equity Deep Buffer ETF - May
 DMB,"BNY Mellon Municipal Bond Infrastructure Fund, Inc. Common Stock"
 DMBS,DoubleLine Mortgage ETF
+DMC,Del Monte Corporation Ordinary Shares
 DMII,Drugs Made In America Acquisition II Corp. - Ordinary Shares
 DMIIR,Drugs Made In America Acquisition II Corp. - Right
 DMIIU,Drugs Made In America Acquisition II Corp. - Unit
@@ -4057,7 +4060,6 @@ FDMT,"4D Molecular Therapeutics, Inc. - Common Stock"
 FDN,First Trust DJ Internet Index Fund
 FDND,FT Vest Dow Jones Internet & Target Income ETF
 FDNI,First Trust Dow Jones International Internet ETF
-FDP,Del Monte Corporation Ordinary Shares
 FDRR,Fidelity Dividend ETF for Rising Rates
 FDRS,Founder-Led ETF
 FDRV,Fidelity Electric Vehicles and Future Transportation ETF
@@ -4626,7 +4628,6 @@ GABC,"German American Bancorp, Inc. - Common Stock"
 GABF,Gabelli ETFs Trust Gabelli Financial Services Opportunities ETF
 GAEM,Simplify Gamma Emerging Market Bond ETF
 GAIA,"Gaia, Inc. - Class A Common Stock"
-GAID,Guinness Atkinson International Dividend Builder ETF
 GAIN,Gladstone Investment Corporation - Business Development Company
 GAING,Gladstone Investment Corporation - 7.125% Notes due 2031
 GAINI,Gladstone Investment Corporation - 7.875% Notes due 2030
@@ -4648,7 +4649,6 @@ GASS,"StealthGas, Inc. - common stock"
 GASZ,Corgi Natural Gas Power & Turbines ETF
 GATX,GATX Corporation Common Stock
 GAU,Galiano Gold Inc.
-GAUD,Guinness Atkinson US Dividend Builder ETF
 GAUG,FT Vest U.S. Equity Moderate Buffer ETF - August
 GAUZ,Gauzy Ltd. - Ordinary Shares
 GAVA,Grayscale Avalanche Staking ETF
@@ -5388,9 +5388,8 @@ HOLOW,MicroCloud Hologram Inc. - Warrant
 HOMB,"Home BancShares, Inc. Common Stock"
 HOMZ,Hoya Capital Housing ETF
 HON,Honeywell International Inc. - Common Stock
-HONAV,Honeywell Aerospace Inc. - Common Stock
+HONA,Honeywell Aerospace Inc. - Common Stock
 HONG,Leverage Shares 2X Long HON Daily ETF
-HONIV,Honeywell International Inc. - Common Stock Ex Distribution When Issued
 HOOD,"Robinhood Markets, Inc. - Class A Common Stock"
 HOOG,Leverage Shares 2X Long HOOD Daily ETF
 HOOW,Roundhill HOOD WeeklyPay ETF
@@ -6810,7 +6809,6 @@ LGHT,Langar Global HealthTech ETF
 LGI,Lazard Global Total Return and Income Fund Common Stock
 LGIH,"LGI Homes, Inc. - Common Stock"
 LGL,"LGL Group, Inc. (The) Common Stock"
-LGL.R,"LGL Group, Inc. (The) Rights (expiring June 23, 2026) Rights"
 LGLV,State Street SPDR US Large Cap Low Volatility Index ETF
 LGN,Legence Corp. - Class A Common stock
 LGND,Ligand Pharmaceuticals Incorporated - Common Stock
@@ -7685,6 +7683,7 @@ MWA,MUELLER WATER PRODUCTS Common Stock
 MWC,"Micware Co., Ltd. - American Depositary Shares"
 MWG,Multi Ways Holdings Limited Class A Ordinary Shares
 MWH,"SOLV Energy, Inc. - Class A common stock"
+MWHS,Skylar Electricity Futures ETF
 MWYN,"Marwynn Holdings, Inc. - Common stock"
 MX,Magnachip Semiconductor Corporation Common Stock
 MXC,Mexco Energy Corporation Common Stock
@@ -7996,7 +7995,6 @@ NMT,Nuveen Massachusetts Quality Municipal Income Fund Common Stock
 NMTC,NeuroOne Medical Technologies Corporation - Common Stock
 NMZ,"Nuveen Municipal High Income Opportunity Fund Common Stock, $0.01 par value, per share"
 NN,NextNav Inc. - Common stock
-NNAVW,NextNav Inc. - Warrant
 NNBR,"NN, Inc. - Common Stock"
 NNDM,Nano Dimension Ltd. - American Depositary Shares
 NNE,Nano Nuclear Energy Inc. - common stock
@@ -8507,6 +8505,8 @@ OST,"Ostin Technology Group Co., Ltd. - Class A Ordinary Shares"
 OSTX,OS Therapies Incorporated Common Stock
 OSUR,"OraSure Technologies, Inc. - Common Stock"
 OSW,OneSpaWorld Holdings Limited - Common Shares
+OTAI,Starlink AI Acquisition Corporation Ordinary Shares
+OTAI.R,"Starlink AI Acquisition Corporation Rights, each entitling the holder to receive one-fourth (1/4) of one ordinary share"
 OTAI.U,"Starlink AI Acquisition Corporation Units, each consisting of one Ordinary Share, and one Right to receive one-fourth (1/4) of one ordinary share"
 OTEX,Open Text Corporation - Common Shares
 OTF,Blue Owl Technology Finance Corp. Common Stock
@@ -10566,7 +10566,6 @@ SOJE,"Southern Company (The) Series 2020C 4.20% Junior Subordinated Notes due Oc
 SOJF,"Southern Company (The) Series 2025A 6.50% Junior Subordinated Notes due March 15, 2085"
 SOLC,Canary Marinade Solana ETF
 SOLM,Amplify Solana 3% Monthly Option Income ETF
-SOLR,Guinness Atkinson Sustainable Energy ETF
 SOLS,Solstice Advanced Materials Inc. - Common Stock
 SOLT,2x Solana ETF
 SOLV,Solventum Corporation Common Stock
@@ -10695,7 +10694,7 @@ SPTM,State Street SPDR Portfolio S&P 1500 Composite Stock Market ETF
 SPTS,State Street SPDR Portfolio Short Term Treasury ETF
 SPTU,State Street SPDR Portfolio Ultra Short T-Bill ETF
 SPTX,"Seaport Therapeutics, Inc. - Common Stock"
-SPUC,Simplify US Equity PLUS Upside Convexity ETF
+SPUC,Simplify US Equity Income ETF
 SPUS,SP Funds S&P 500 Sharia Industry Exclusions ETF
 SPUT,Innovator Equity Premium Income - Daily PutWrite ETF
 SPUU,Direxion Daily S&P 500 Bull 2X ETF
@@ -10762,7 +10761,7 @@ SRTS,"Sensus Healthcare, Inc. - Common Stock"
 SRTY,ProShares UltraPro Short Russell2000
 SRV,NXG Cushing Midstream Energy Fund Common Shares of Beneficial Interest
 SRVR,Pacer Data & Infrastructure Real Estate ETF
-SRXH,"SRX Health Solutions, Inc. Common Stock"
+SRXH,SRX Global Inc. Common Stock
 SRZN,"Surrozen, Inc. - Common Stock"
 SRZNW,"Surrozen, Inc. - Warrant"
 SSAC,SPACSphere Acquisition Corp. - Class A Ordinary Shares
@@ -11170,7 +11169,7 @@ TFPN,Blueprint Chesapeake Multi-Asset Trend ETF
 TFSL,TFS Financial Corporation - Common Stock
 TFX,Teleflex Incorporated Common Stock
 TG,Tredegar Corporation Common Stock
-TGB,"Taseko Mines, Ltd. Common Stock"
+TGB,Trekor Metals Limited Common Shares
 TGE,The Generation Essentials Group Class A Ordinary Shares
 TGE.W,"The Generation Essentials Group Warrants, each whole warrant exercisable for one Class A Ordinary Share"
 TGEN,Tecogen Inc. Common Stock
@@ -11674,7 +11673,7 @@ UFI,"Unifi, Inc. New Common Stock"
 UFIV,US Treasury 5 Year Note ETF
 UFO,Procure Space ETF
 UFOD,Tuttle Capital UFO Disclosure ETF
-UFOX,Defiance Connective Technologies ETF
+UFOX,Defiance Space and Connective Tech ETF
 UFPI,"UFP Industries, Inc. - Common Stock"
 UFPT,"UFP Technologies, Inc. - Common Stock"
 UG,"United-Guardian, Inc. - Common Stock"
