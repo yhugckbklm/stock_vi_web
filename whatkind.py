@@ -45,12 +45,12 @@ select_stock = st.selectbox(
 if select_stock != "":
     ticker = select_stock.split("|")[0]
     name = select_stock.split("|")[1]
-if 'click_s' not in st.session_state:
-  st.session_state.click_s = False
-if 'click_s' in st.session_state:
-  ticker_symbol = ticker
-  st.write(ticker_symbol)
-  ticker_object = yf.Ticker(ticker_symbol)
+
+if st.button("umm:",key="click90"):
+  if 'stock_status' in st.session_state:
+    ticker_symbol = ticker
+    st.write(ticker_symbol)
+    ticker_object = yf.Ticker(ticker_symbol)
 cash_flow = ticker_object.cashflow
 cfo = cash_flow.loc['Operating Cash Flow'].iloc[0]
 # ดึงค่า CFO (Operating Cash Flow) และ CAPEX (Capital Expenditures)
