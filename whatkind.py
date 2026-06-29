@@ -47,9 +47,6 @@ if select_stock != "":
     name = select_stock.split("|")[1]
     st.session_state.choose_stock = ticker_symbol
 
-if st.button("umm:",key="click90"):
-  if st.session_state.choose_stock:
-    cally(ticker_symbol)
     
     
 def cally(ticker_symbol):
@@ -125,3 +122,6 @@ def cally(ticker_symbol):
   real_price = equity_value/total_shares
   st.write(f"real price of {ticker_symbol} : {real_price}")
   return 0
+if st.button("umm:",key="click90"):
+  if st.session_state.choose_stock:
+    cally(ticker_symbol)
