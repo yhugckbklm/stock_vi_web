@@ -43,11 +43,13 @@ select_stock = st.selectbox(
     "input stock",options=[""]+stock_options,index=0
 )
 if select_stock != "":
-    ticker = select_stock.split("|")[0]
+    ticker_symbol = select_stock.split("|")[0]
     name = select_stock.split("|")[1]
+    st.session_state.choose_stock = ticker_symbol
 
 if st.button("umm:",key="click90"):
-  if 'stock_status' in st.session_state:
+  if st.session_state.choose_stock:
+    cally(ticker_symbol)
     
     
 def cally(ticker_symbol):
