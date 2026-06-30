@@ -61,9 +61,9 @@ def cally(ticker_symbol):
   fcf = cfo + capex if capex < 0 else cfo - capex
 
 ##st.write(fcf)
-
-  forward_pe = ticker_object.info.get('forwardPE')
-  peg_ratio = ticker_object.info.get('pegRatio')
+  info = ticker_object.info
+  forward_pe = info.get('forwardPE')
+  peg_ratio = info.get('pegRatio')
 
   if forward_pe and peg_ratio and peg_ratio != 0:
     g_from_peg = (forward_pe / peg_ratio)  # ผลลัพธ์มักออกมาเป็นเปอร์เซ็นต์เต็ม เช่น 14.5 หมายถึง 14.5%
@@ -117,7 +117,7 @@ def cally(ticker_symbol):
   cash_and_equiv = balance_sheet.loc['Cash And Cash Equivalents'].iloc[0]
   net_debt = total_debt - cash_and_equiv
   equity_value = business_value - net_debt
-  total_shares = ticker_object.info.get('sharesOutstanding')
+  total_shares = info.get('sharesOutstanding')
   real_price = equity_value/total_shares
   st.write(f"real price of {ticker_symbol} : {real_price}")
   return 0
