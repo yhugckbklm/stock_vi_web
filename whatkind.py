@@ -56,9 +56,11 @@ def cally(ticker_symbol):
   cfo = cash_flow.loc['Operating Cash Flow'].iloc[0]
 # ดึงค่า CFO (Operating Cash Flow) และ CAPEX (Capital Expenditures)
 # หมายเหตุ: ใน yfinance เวอร์ชันล่าสุด บรรทัดแถวจะถูกเก็บไว้เป็นชื่อเต็ม หรือใช้ .loc ในการดึง
-  capex = cash_flow.loc['Capital Expenditure'].iloc[0]
+  whole_capex = cash_flow.loc['Capital Expenditure'].iloc[0]
+  dna = cash_flow.loc['Depreciation And Amortization'].iloc[0]
+  capex = whole_capex - dna if whole_capex > 0 else whole_capex + dna
 # 2. ดึงงบกระแสเงินสด (Cash Flow Statement) ออกมาเป็น DataFrame
-  fcf = cfo + capex if capex < 0 else cfo - capex
+  fcf = cfo - capex
 
 ##st.write(fcf)
   info = ticker_object.info
