@@ -6,7 +6,7 @@ import pandas as pd
 
 st.header("Welcome to Premium")
 ticker_symbol = st.session_state.selected_item
-st.write(ticker_symbol)
+
 def cally(ticker_symbol):
   st.write(ticker_symbol)
   ticker_object = yf.Ticker(ticker_symbol)
