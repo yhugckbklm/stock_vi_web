@@ -16,7 +16,8 @@ def cally(ticker_symbol):
 # หมายเหตุ: ใน yfinance เวอร์ชันล่าสุด บรรทัดแถวจะถูกเก็บไว้เป็นชื่อเต็ม หรือใช้ .loc ในการดึง
   whole_capex = abs(cash_flow.loc['Capital Expenditure'].iloc[0])
   dna = cash_flow.loc['Depreciation And Amortization'].iloc[0]
-  capex = whole_capex - dna
+  growth_capex = whole_capex - dna
+  capex = whole_capex + growth_capex
 # 2. ดึงงบกระแสเงินสด (Cash Flow Statement) ออกมาเป็น DataFrame
   fcf = cfo - capex
 
