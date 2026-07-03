@@ -17,7 +17,7 @@ def cally(ticker_symbol):
   whole_capex = abs(cash_flow.loc['Capital Expenditure'].iloc[0])
   dna = cash_flow.loc['Depreciation And Amortization'].iloc[0]
   growth_capex = whole_capex - dna
-  capex = whole_capex + growth_capex
+  capex = whole_capex - growth_capex
 # 2. ดึงงบกระแสเงินสด (Cash Flow Statement) ออกมาเป็น DataFrame
   fcf = cfo - capex
 
