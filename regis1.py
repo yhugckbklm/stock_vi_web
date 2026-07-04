@@ -1,5 +1,4 @@
 import streamlit as st
-import requests
 import re
 from supabase import create_client, Client
 import pandas as pd
@@ -49,8 +48,7 @@ def signin(email_sign , password_sign):
         return True   
             
 
-st.header("notification true value of your chosen stock every quarter.")
-st.text("if you use the premium option, we will send you the true value of your chosen stock every quarter.")
+st.header("Welcome to Tech DCF")
 
 
     
@@ -59,6 +57,7 @@ if "is_authenticated" not in st.session_state:
     st.session_state.is_authenticated = False
     st.session_state.user_email = ""
 with st.form("my_signup_form"):
+    st.header("sign up")
     email = st.text_input("email:",key="signup_email")
     password = st.text_input("password:",key="signup_password")
     raw_line_id = st.text_input("line id: ")
@@ -82,7 +81,9 @@ if s:
                 })
         except Exception as e:
             st.error(f"สมัครสมาชิกไม่สำเร็จ: {e}")
+                        
 with st.form("my_signin_form"):
+    st.header("sign in")
     email_sign = st.text_input("email:",key="login_email")
     password_sign = st.text_input("password:",key="login_pass")
             
@@ -143,7 +144,7 @@ if 'stock_status' not in st.session_state:
 
 
 select_stock = st.selectbox(
-    "input stock",options=[""]+stock_options,index=0
+    "search for stock",options=[""]+stock_options,index=0
 )
 if select_stock != "":
     ticker = select_stock.split("|")[0]
