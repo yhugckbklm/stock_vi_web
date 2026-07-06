@@ -106,7 +106,7 @@ if sign_in_button:
                 if st.session_state.is_authenticated:
                     st.rerun()      
             
-
+"""
 url = "http://www.nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt"
 
                       
@@ -196,3 +196,4 @@ if select_stock != "":
                         supabase.table("stock_list").delete().eq("key_ticker", ticker).eq("user_id", current_user_uuid).execute()             
                     st.rerun() 
                               
+"""
