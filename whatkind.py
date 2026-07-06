@@ -47,7 +47,7 @@ if 'stock_status' not in st.session_state:
 
 
 select_stock = st.selectbox(
-    "search for stock",options=[""]+stock_options,index=0
+    "search for stock",options=[""]+stock_options,index=0,key="568"
 )
 if select_stock != "":
     ticker_symbol = select_stock.split("|")[0]
@@ -200,7 +200,7 @@ if 'stock_status' not in st.session_state:
 
 
 select_stock = st.selectbox(
-    "search for stock",options=[""]+stock_options,index=0
+    "search for stock",options=[""]+stock_options,index=0,key="569"
 )
 if select_stock != "":
     ticker = select_stock.split("|")[0]
