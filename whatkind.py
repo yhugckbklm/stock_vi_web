@@ -40,25 +40,25 @@ def search_list():
     
     return df['display_text'].tolist()
   
-stock_options = search_list()
+stock_options_num1 = search_list()
 
-if 'stock_status' not in st.session_state:
-    st.session_state.stock_status = {}
+if 'stock_status_num1' not in st.session_state:
+    st.session_state.stock_status_num1 = {}
 
 
-select_stock = st.selectbox(
+select_stock_num1 = st.selectbox(
     "search for stock",options=[""]+stock_options,index=0,key="568"
 )
-if select_stock != "":
-    ticker_symbol = select_stock.split("|")[0]
-    name = select_stock.split("|")[1]
-    st.session_state.choose_stock = ticker_symbol
+if select_stock_num1 != "":
+    ticker_symbol_num1 = select_stock_num1.split("|")[0]
+    name_num1 = select_stock_num1.split("|")[1]
+    st.session_state.choose_stock_num1 = ticker_symbol_num1
 
     
     
-def cally(ticker_symbol):
-  st.write(ticker_symbol)
-  ticker_object = yf.Ticker(ticker_symbol)
+def cally(ticker_symbol_num1):
+  st.write(ticker_symbol_num1)
+  ticker_object = yf.Ticker(ticker_symbol_num1)
   cash_flow = ticker_object.cashflow
   
   
