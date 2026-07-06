@@ -142,11 +142,11 @@ def cally(ticker_symbol_num1):
   equity_value = business_value - net_debt
   total_shares = info.get('sharesOutstanding')
   real_price = equity_value/total_shares
-  st.write(f"real price of {ticker_symbol} : {real_price}")
+  st.write(f"real price of {ticker_symbol_num1} : {real_price}")
   return 0
 if st.button("search!",key="click90"):
-  if st.session_state.choose_stock:
-    cally(ticker_symbol)
+  if st.session_state.choose_stock_num1:
+    cally(ticker_symbol_num1)
 
 def get_valid_token():
                     try:
