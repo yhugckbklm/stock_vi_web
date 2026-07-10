@@ -95,6 +95,6 @@ def cally(ticker_symbol):
   real_price = equity_value/total_shares
   st.write(f"real price of {ticker_symbol} : {real_price}")
   sell_price = real_price * 0.3
-  st.write(f"sell price of {ticker_symbol_num1} : {sell_price}")
+  st.write(f"sell price of {ticker_symbol} : {sell_price}")
   return 0
 cally(ticker_symbol)  
