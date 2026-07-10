@@ -143,6 +143,8 @@ def cally(ticker_symbol_num1):
   total_shares = info.get('sharesOutstanding')
   real_price = equity_value/total_shares
   st.write(f"real price of {ticker_symbol_num1} : {real_price}")
+  sell_price = real_price * 0.3
+  st.write(f"sell price of {ticker_symbol_num1} : {sell_price}")
   return 0
 if st.button("search!",key="click90"):
   if st.session_state.choose_stock_num1:
