@@ -10,9 +10,9 @@ sb_key: str = os.getenv("sb_key")
 supabase: Client = create_client(sb_url,sb_key)
 
 st.header("search for real value of your stock")
-url = "http://www.nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt"
+##url = "http://www.nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt"
 
-                      
+url = "https://raw.githubusercontent.com/fja05680/sp500-nasdaq100-tsx-tickers/main/nasdaq100.csv"
                                 
                            
 try:
