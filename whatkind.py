@@ -147,7 +147,10 @@ def cally(ticker_symbol_num1):
   return 0
 if st.button("search!",key="click90"):
   if st.session_state.choose_stock_num1:
-    cally(ticker_symbol_num1)
+    try:
+      cally(ticker_symbol_num1)
+    except:
+      st.write("can't calculate not enough information")
 
 def get_valid_token():
                     try:
