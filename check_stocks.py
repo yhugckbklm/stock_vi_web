@@ -94,8 +94,11 @@ def cally(ticker_symbol):
   total_shares = info.get('sharesOutstanding')
   real_price = equity_value/total_shares
   st.write(f"real price of {ticker_symbol} : {real_price}")
-  gap_sell_price = real_price * 0.3
+  gap_sell_price = real_price * 0.25
   sell_price = gap_sell_price + real_price
   st.write(f"sell price of {ticker_symbol} : {sell_price}")
   return 0
-cally(ticker_symbol)  
+try:
+  cally(ticker_symbol)
+except:
+  st.write("")
