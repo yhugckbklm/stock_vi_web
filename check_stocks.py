@@ -101,4 +101,4 @@ def cally(ticker_symbol):
 try:
   cally(ticker_symbol)
 except:
-  st.write("")
+  st.write("can't calculate not enough information")
