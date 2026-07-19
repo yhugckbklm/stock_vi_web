@@ -12,7 +12,7 @@ supabase: Client = create_client(sb_url,sb_key)
 st.header("search for real value of your stock")
 url = "http://www.nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt"
                                 
-                           
+st.write("search true stock price")                           
 try:
     # ต้องระบุ sep='|' เพราะไฟล์นี้ใช้ขีดตั้งเป็นตัวแบ่ง
     df = pd.read_csv(url, sep='|')
@@ -141,7 +141,7 @@ def cally(ticker_symbol_num1):
   total_shares = info.get('sharesOutstanding')
   real_price = equity_value/total_shares
   st.write(f"real price of {ticker_symbol_num1} : {real_price}")
-  gap_sell_price = real_price * 0.3
+  gap_sell_price = real_price * 0.25
   sell_price = gap_sell_price + real_price
   st.write(f"sell price of {ticker_symbol_num1} : {sell_price}")
   return 0
@@ -166,7 +166,7 @@ def get_valid_token():
                         except:
                                st.error("Session ของคุณหมดอายุแล้ว กรุณาล็อกอินใหม่")
                                return None
-                             
+st.write("add your stock for next quarter calculation")                             
 url = "http://www.nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt"
 
                       
