@@ -10,25 +10,25 @@ sb_key: str = os.getenv("sb_key")
 supabase: Client = create_client(sb_url,sb_key)
 
 st.header("search for real value of your stock")
-url = "http://www.nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt"
+##url = "http://www.nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt"
                                 
 st.write("search true stock price")                           
-try:
+##try:
     # ต้องระบุ sep='|' เพราะไฟล์นี้ใช้ขีดตั้งเป็นตัวแบ่ง
-    df = pd.read_csv(url, sep='|')
+    ##df = pd.read_csv(url, sep='|')
     
     # ลบบรรทัดสุดท้ายที่เป็นข้อความสรุป (มักจะทำให้เกิด Error ถ้าไม่ลบ)
-    df = df[:-1] 
+    ##df = df[:-1] 
     
     # เลือกเฉพาะ Symbol และชื่อหุ้น (ในไฟล์นี้ใช้ชื่อ 'Symbol' และ 'Security Name')
-    df_cleaned = df[['Symbol', 'Security Name']]
+    ##df_cleaned = df[['Symbol', 'Security Name']]
     
     # บันทึกเป็น CSV จริงๆ (ใช้คอมม่าปกติ)
-    df_cleaned.to_csv("nasdaq_stocks.csv", index=False)
-    print("ดาวน์โหลดและบันทึกไฟล์สำเร็จ!")
+    ##df_cleaned.to_csv("nasdaq_stocks.csv", index=False)
+    ##print("ดาวน์โหลดและบันทึกไฟล์สำเร็จ!")
     
-except Exception as e:
-    print(f"เกิดข้อผิดพลาด: {e}")
+##except Exception as e:
+    ##print(f"เกิดข้อผิดพลาด: {e}")
        
 @st.cache_data
 def search_list():
@@ -149,8 +149,8 @@ if st.button("search!",key="click90"):
   if st.session_state.choose_stock_num1:
     try:
       cally(ticker_symbol_num1)
-    except:
-      st.write("can't calculate not enough information")
+    except Exception as e:
+      st.write(f"can't calculate not enough information: {e}")
 
 def get_valid_token():
                     try:
@@ -167,27 +167,27 @@ def get_valid_token():
                                st.error("Session ของคุณหมดอายุแล้ว กรุณาล็อกอินใหม่")
                                return None
 st.write("add your stock for next quarter calculation")                             
-url = "http://www.nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt"
+##url = "http://www.nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt"
 
                       
                                 
                            
-try:
+##try:
     # ต้องระบุ sep='|' เพราะไฟล์นี้ใช้ขีดตั้งเป็นตัวแบ่ง
-    df = pd.read_csv(url, sep='|')
+    ##df = pd.read_csv(url, sep='|')
     
     # ลบบรรทัดสุดท้ายที่เป็นข้อความสรุป (มักจะทำให้เกิด Error ถ้าไม่ลบ)
-    df = df[:-1] 
+    ##df = df[:-1] 
     
     # เลือกเฉพาะ Symbol และชื่อหุ้น (ในไฟล์นี้ใช้ชื่อ 'Symbol' และ 'Security Name')
-    df_cleaned = df[['Symbol', 'Security Name']]
+    ##df_cleaned = df[['Symbol', 'Security Name']]
     
     # บันทึกเป็น CSV จริงๆ (ใช้คอมม่าปกติ)
-    df_cleaned.to_csv("nasdaq_stocks.csv", index=False)
-    print("ดาวน์โหลดและบันทึกไฟล์สำเร็จ!")
+    ##df_cleaned.to_csv("nasdaq_stocks.csv", index=False)
+    ##print("ดาวน์โหลดและบันทึกไฟล์สำเร็จ!")
     
-except Exception as e:
-    print(f"เกิดข้อผิดพลาด: {e}")
+##except Exception as e:
+    ##print(f"เกิดข้อผิดพลาด: {e}")
        
 @st.cache_data
 def search_list():

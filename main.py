@@ -44,8 +44,9 @@ with st.sidebar:
     with col2:
         if st.button("click!", key="btn1"):
             st.session_state.page_selection = "home"
-            st.rerun()
+            st.rerun()    
     if st.session_state.is_authenticated:
+        st.write("here is your stocks")
         valid_token = get_valid_token()
         if valid_token: 
             current_user_uuid = st.session_state.user_id  

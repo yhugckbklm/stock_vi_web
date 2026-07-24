@@ -25,7 +25,7 @@ def get_valid_token():
                             st.session_state.refresh_token = refresh_res.session.refresh_token
                             return st.session_state.access_token
                         except:
-                               st.error("Session ของคุณหมดอายุแล้ว กรุณาล็อกอินใหม่")
+                               st.error("session expired pls log in again")
                                return None
   
 def signup(email, password, line_id):
@@ -80,7 +80,7 @@ if s:
                          }
                 })
         except Exception as e:
-            st.error(f"สมัครสมาชิกไม่สำเร็จ: {e}")
+            st.error(f"there is a problem, can't sign up :(: {e}")
                         
 with st.form("my_signin_form"):
     st.header("sign in")
@@ -102,7 +102,7 @@ if sign_in_button:
                 st.session_state.user_id = response.user.id
                 st.session_state.is_authenticated = True
                 st.session_state.user_email = response.user.email
-                st.success(f"ตอนนี้คุณล็อกอินในชื่อ: {response.user.email}") 
+                st.success(f"login successfully!: {response.user.email}") 
                 if st.session_state.is_authenticated:
                     st.rerun()      
    
