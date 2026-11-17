@@ -16,7 +16,7 @@ app.add_middleware(
 class stock_title(BaseModel):
   message : str
 
-@app.post("/server")
+@app.post("/")
 async def receive_stock_title(data: stock_title):
     received_s_t = data.message
     r_s_info = pull_sec_data(received_s_t)

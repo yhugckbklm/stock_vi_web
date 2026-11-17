@@ -4,3 +4,4 @@ yfinance
 pandas
 supabase
 python-dotenv
+edgartools
